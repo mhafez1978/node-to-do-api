@@ -1,6 +1,6 @@
 # node-to-do-api
 
-### Node backend server task or to do API repo. Using node, express, and static json object data
+- Node backend server task or to do API repo. Using node, express, and static json object data
 
 ### what will it do:
 
