@@ -69,13 +69,23 @@ app.patch('/tasks/api/v1/task/:id', (req, res) => {
   });
 });
 
-// app.delete("/tasks/api/v1/:id", (req, res) => {
-//   res.send("here we will be deleting a task by id...");
-// });
+app.delete('/tasks/api/v1/task/:id', (req, res) => {
+  let id = req.params.id;
+  id = Number(id);
+  data.map((task) => {
+    if (task.id === id) {
+      task = { id: '', text: '' };
+      res.send(task);
+    }
+  });
+});
 
-// app.delete("/tasks/api/v1/all", (req, res) => {
-//   res.send("here we will be deleting all tasks...");
-// });
+app.delete('/tasks/api/v1/task/del/all', (req, res) => {
+  const results = data.map((task) => {
+    task = { id: '', text: '' };
+  });
+  res.send(results);
+});
 
 const PORT = process.env.PORT || 7777;
 app.listen(PORT, () => {
