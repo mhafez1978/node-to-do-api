@@ -23,15 +23,15 @@ app.get('/tasks/api/v1/all', (req, res) => {
 
 app.post('/tasks/api/v1/add', (req, res) => {
   const id = Math.floor(Math.random() * 100);
-  console.log(id);
+  // console.log(id);
   const text = req.body;
-  console.log(text);
+  // console.log(text);
   const newTask = { id: id, text: text };
   if (!text) {
     res.send('please type task to add ...');
   } else {
     data.push(newTask);
-    console.log(JSON.stringify(newTask) + '  was added');
+    // console.log(JSON.stringify(newTask) + '  was added');
     res.send(data);
   }
 });
