@@ -12,8 +12,8 @@ app.get('/', (req, res) => {
 });
 
 // API Routes
-app.get('/tasks/api/v1/all', (req, res) => {
-  const myList = null || [];
+app.get('/tasks/api/v1/task/all', (req, res) => {
+  const myList = [];
   const task = data.map((each) => {
     return each;
   });
@@ -21,7 +21,7 @@ app.get('/tasks/api/v1/all', (req, res) => {
   res.send(myList);
 });
 
-app.post('/tasks/api/v1/add', (req, res) => {
+app.post('/tasks/api/v1/task/add', (req, res) => {
   const id = Math.floor(Math.random() * 100);
   // console.log(id);
   const text = req.body;
@@ -36,13 +36,17 @@ app.post('/tasks/api/v1/add', (req, res) => {
   }
 });
 
-// app.get("/tasks/api/v1/task/:id", (req, res) => {
-//   fetch("https://jsonplaceholder.typicode.com/posts/1")
-//     .then((res) => res.json())
-//     .then((json) => res.send(json));
-// });
+app.get('/tasks/api/v1/task/:id', (req, res) => {
+  let id = parseInt(req.params.id);
+  console.log(typeof id);
+  data.map((each) => {
+    if (id === each.id) {
+      res.json(each);
+    }
+  });
+});
 
-// app.patch("/tasks/api/v1/:id", (req, res) => {
+// app.patch("/tasks/api/v1/task/:id", (req, res) => {
 //   res.send(
 //     "here we will be updating task details by retrieving it first, then updating what is needed..."
 //   );
