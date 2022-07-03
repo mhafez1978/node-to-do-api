@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 
 // API Routes
 app.get('/tasks/api/v1/task/all', (req, res) => {
-  const task = data.map((each) => {
+  let task = data.map((each) => {
     return each;
   });
   res.send(task);
@@ -57,11 +57,17 @@ app.get('/tasks/api/v1/task/:id', async (req, res) => {
   });
 });
 
-// app.patch("/tasks/api/v1/task/:id", (req, res) => {
-//   res.send(
-//     "here we will be updating task details by retrieving it first, then updating what is needed..."
-//   );
-// });
+app.patch('/tasks/api/v1/task/:id', (req, res) => {
+  let id = req.params.id;
+  let text = req.body.text;
+  id = Number(id);
+  data.map((task) => {
+    if (task.id === id) {
+      task = { id: task.id, text: text };
+      res.send(task);
+    }
+  });
+});
 
 // app.delete("/tasks/api/v1/:id", (req, res) => {
 //   res.send("here we will be deleting a task by id...");
