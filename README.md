@@ -1,6 +1,7 @@
 # node-to-do-api
 
-Node backend server task or to do API repo. Using node, express
+Node backend server task or to do API repo. Using node, express, and either fecth, or axios to make the fake API requests and return response.
+I will also be using local objects/arrays with pre built data.
 
 # what will it do:
 
@@ -17,3 +18,9 @@ Node backend server task or to do API repo. Using node, express
 - http post to add new task
 - http delete to delete task by id
 - http patch to update a task by id
+
+# How to use this repo
+- Clone my repo to your machine, or download the zip
+- Open in your favorite Code IDE editor ( I use VSCODE )
+- run: npm install to install all code prerequisite dependenices
+- run: npm run dev to start app/server
