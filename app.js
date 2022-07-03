@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 const data = require('./data/taskList.js');
+const myList = [];
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -13,35 +14,45 @@ app.get('/', (req, res) => {
 
 // API Routes
 app.get('/tasks/api/v1/task/all', (req, res) => {
-  const myList = [];
   const task = data.map((each) => {
     return each;
   });
-  myList.push(task);
-  res.send(myList);
+  res.send(task);
 });
 
 app.post('/tasks/api/v1/task/add', (req, res) => {
   const id = Math.floor(Math.random() * 100);
   // console.log(id);
-  const text = req.body;
+  const text = req.body.text;
   // console.log(text);
   const newTask = { id: id, text: text };
   if (!text) {
     res.send('please type task to add ...');
   } else {
     data.push(newTask);
+
     // console.log(JSON.stringify(newTask) + '  was added');
     res.send(data);
   }
 });
 
-app.get('/tasks/api/v1/task/:id', (req, res) => {
-  let id = parseInt(req.params.id);
-  console.log(typeof id);
-  data.map((each) => {
-    if (id === each.id) {
-      res.json(each);
+app.get('/tasks/api/v1/task/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  const result = data.map((task) => {
+    if (task.id === id) {
+      return task;
+    } else {
+      const msg = { error: 'no task found by this id...' };
+      return msg;
+    }
+  });
+  // console.log(result);
+  const d = result.map((each) => {
+    if (each.id === id && !each.error) {
+      const r = each.id;
+      const t = each.text;
+      const m = { id: r, task: t };
+      res.send(m);
     }
   });
 });
