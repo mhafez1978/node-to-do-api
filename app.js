@@ -1,18 +1,18 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 
-const data = require("./data/taskList.js");
+const data = require('./data/taskList.js');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Routes
-app.get("/", (req, res) => {
-  res.send("Welcome to your Node To Do App Server");
+app.get('/', (req, res) => {
+  res.send('Welcome to your Node To Do App Server');
 });
 
 // API Routes
-app.get("/tasks/api/v1/all", (req, res) => {
+app.get('/tasks/api/v1/all', (req, res) => {
   const myList = null || [];
   const task = data.map((each) => {
     return each;
@@ -21,9 +21,20 @@ app.get("/tasks/api/v1/all", (req, res) => {
   res.send(myList);
 });
 
-// app.post("/tasks/api/v1/add", (req, res) => {
-//   res.send("Add a new task...");
-// });
+app.post('/tasks/api/v1/add', (req, res) => {
+  const id = Math.floor(Math.random() * 100);
+  console.log(id);
+  const text = req.body;
+  console.log(text);
+  const newTask = { id: id, text: text };
+  if (!text) {
+    res.send('please type task to add ...');
+  } else {
+    data.push(newTask);
+    console.log(JSON.stringify(newTask) + '  was added');
+    res.send(data);
+  }
+});
 
 // app.get("/tasks/api/v1/task/:id", (req, res) => {
 //   fetch("https://jsonplaceholder.typicode.com/posts/1")
@@ -45,7 +56,7 @@ app.get("/tasks/api/v1/all", (req, res) => {
 //   res.send("here we will be deleting all tasks...");
 // });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 7777;
 app.listen(PORT, () => {
   console.log(
     `Your To Do App server is running on http://localhost:${PORT}...`
